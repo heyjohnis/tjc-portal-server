@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:8080
+
+@jwt = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQxZDhiNGEyY2RhODg4MWU5NzkzNTYiLCJpYXQiOjE3MDIxMjgyODksImV4cCI6MTcwMjMwMTA4OX0.R5WxoB6OF-bnrxmE7GxUkBwymbRmgMeCRIx9z5sPzkI
+
+### 로그인
+POST {{baseUrl}}/auth/login HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+
+{
+    "login_id": "heyjohnis", 
+    "password": "hj@28480404"
+}
+
+### 구성원 가지고 오기
+GET {{baseUrl}}/member/daebang/pic?cnt=10 HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+Authorization: Bearer {{jwt}}
