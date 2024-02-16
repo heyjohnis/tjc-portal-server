@@ -6,7 +6,7 @@
     "@": "dist"
   },
   "scripts": {
-    "dev": "nodemon",
+    "dev": "nodemon --exec ts-node app.ts",
     "copy-files": "cp -r src/public/ dist/public/ && cp -r src/views/ dist/views/",
     "build": "tsc && npm run copy-files",
     "start": "node dist/app.js"

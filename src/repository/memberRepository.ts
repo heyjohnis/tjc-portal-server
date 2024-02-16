@@ -30,10 +30,23 @@ export async function getDaebangPic(req: Request, res: Response) {
   return db.execute(SELECT_DAE_BANG_PIC, [cnt || 0]).then((res) => res[0]);
 }
 
-export async function getMemberData(rreq: Request, res: Response) {
+export async function getMemberData(req: Request) {
+  const { churchidx } = req.query;
   const SELECT_MEMBER = `
-
+	SELECT 
+		name
+		, small_group
+		, sex
+		, nickname
+		, photo
+	FROM 
+		tjc_family_table 
+	WHERE 
+		churchidx = ? 
+		AND status != 6
+	ORDER BY small_group
 	`;
+  return db.execute(SELECT_MEMBER, [churchidx || 6]).then((res) => res[0]);
 }
 
 export async function recentWorshipData(req: Request, res: Response) {
@@ -47,7 +60,7 @@ export async function recentWorshipData(req: Request, res: Response) {
 		date > DATE_SUB(CURRENT_DATE(), INTERVAL 4 DAY) 
 		AND date < DATE_ADD(CURRENT_DATE(), INTERVAL 6 day)  
 		AND title NOT LIKE '%오후%'
-	ORDER BY date DESC;
+	ORDER BY date DESC
 	`;
   return db.execute(SELECT_RECENT_WORSHIP).then((res) => res[0]);
 }

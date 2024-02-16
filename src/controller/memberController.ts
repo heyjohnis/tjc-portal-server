@@ -8,7 +8,7 @@ export function getDaebangPic(req: Request, res: Response) {
 }
 
 export function getMemberData(req: Request, res: Response) {
-  repository.getMemberData(req, res).then((data) => {
+  repository.getMemberData(req).then((data) => {
     res.status(200).json(data);
   });
 }
